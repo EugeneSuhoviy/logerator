@@ -1,5 +1,7 @@
 <template>
-    <vee-form @submit="onSubmit" :validation-schema="schema">
+    <fieldset>
+        <legend>Finished changelog:</legend>
+
         <textarea-field :label="'Changelog'" />
         <textarea-field :label="'QA Notes'" />
         <textarea-field :label="'Deployment notes'" />
@@ -26,53 +28,14 @@
                 <option value="3">Pre Production</option>
             </select>
         </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </vee-form>
+    </fieldset>
 </template>
-
 <script>
-import TextareaField from '@/components/fields/Textarea.vue';
-import InputLinkField from '@/components/fields/InputLink.vue';
-import useFormStore from '@/stores/form.js';
-import { mapStores } from 'pinia';
+import InputLinkField from '@/components/form/inputs/InputLink.vue';
+import TextareaField from '@/components/form/inputs/Textarea.vue';
 
 export default {
-    name: 'FormFinished',
-    components: {
-        TextareaField,
-        InputLinkField
-    },
-    computed: {
-        ...mapStores(useFormStore)
-    },
-    data() {
-        return {
-            schema: {
-                pr_release: 'required'
-            }
-        };
-    },
-    methods: {
-        onSubmit(values) {
-            this.formStore.values = this.prepareJson(values);
-        },
-
-        prepareJson(values) {
-            const result = [];
-            const valuesKeys = Object.keys(values); // same names are used for refs
-
-            for (const element of valuesKeys) {
-                result.push({
-                    label: this.$refs[element].label,
-                    data: values[element],
-                    inputType: this.$refs[element].$el,
-                    name: this.$refs[element].label.name
-                });
-            }
-
-            return result;
-        }
-    }
+    name: 'Finished',
+    components: { TextareaField, InputLinkField }
 };
 </script>

@@ -19,10 +19,9 @@
 </template>
 <script>
 import copy from 'copy-to-clipboard';
-// import { convert } from 'html-to-text';
 import TurndownService from 'turndown';
 
-import PreviewRow from '@/components/PreviewRow.vue';
+import PreviewRow from '@/components/preview/Row.vue';
 import useFormStore from '@/stores/form.js';
 import { mapStores } from 'pinia';
 

@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import LoggerForm from '@/components/LoggerForm.vue';
-import LoggerPreview from "@/components/LoggerPreview.vue";
+import LoggerForm from '@/components/form/Form.vue';
+import LoggerPreview from "@/components/preview/Preview.vue";
 
 export default {
     name: 'App',
