@@ -1,16 +1,13 @@
 <template>
     <vee-form @submit="onSubmit" :validation-schema="schema">
         <textarea-field :label="'Changelog'" />
-
         <textarea-field :label="'QA Notes'" />
-
         <textarea-field :label="'Deployment notes'" />
 
-        <input-link-field :name="'link_store'" :label="'Link to Store'" />
-        <input-link-field :name="'screenshot'" :label="'Attached screenshots'" />
-
-        <input-link-field :name="'pr_staging'" :label="'PR Staging'" />
-        <input-link-field :name="'pr_release'" :label="'PR Release'" />
+        <input-link-field ref="link_store" :name="'link_store'" :label="'Link to Store'" />
+        <input-link-field ref="screenshot" :name="'screenshot'" :label="'Attached screenshots'" />
+        <input-link-field ref="pr_release" :name="'pr_release'" :label="'PR Release'" />
+        <input-link-field ref="pr_staging" :name="'pr_staging'" :label="'PR Staging'" />
 
         <label for="basic-url" class="form-label">Environment</label>
         <div class="input-group mb-3">
@@ -33,6 +30,7 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </vee-form>
 </template>
+
 <script>
 import TextareaField from '@/components/fields/Textarea.vue';
 import InputLinkField from '@/components/fields/InputLink.vue';
@@ -57,9 +55,23 @@ export default {
     },
     methods: {
         onSubmit(values) {
-            this.formStore.values = values;
+            this.formStore.values = this.prepareJson(values);
+        },
 
-            console.log('log_:', values);
+        prepareJson(values) {
+            const result = [];
+            const valuesKeys = Object.keys(values); // same names are used for refs
+
+            for (const element of valuesKeys) {
+                result.push({
+                    label: this.$refs[element].label,
+                    data: values[element],
+                    inputType: this.$refs[element].$el,
+                    name: this.$refs[element].label.name
+                });
+            }
+
+            return result;
         }
     }
 };

@@ -13,8 +13,8 @@
   "dependencies": {
     "@vee-validate/rules": "^4.12.4",
     "copy-to-clipboard": "^3.3.3",
-    "html-to-text": "^9.0.5",
     "pinia": "^2.1.7",
+    "turndown": "^7.1.2",
     "vee-validate": "^4.12.4",
     "vue": "^3.3.11"
   },

@@ -2,26 +2,35 @@
     <h2>Preview</h2>
 
     <div class="preview">
-        <div class="preview__source">
-            <ul>
-                <li v-for="field in this.formStore.values" :key="field">
-                    {{ field }}
-                </li>
-            </ul>
+        <div class="preview__source" v-if="this.formStore.values.length">
+            <h1>@EugeneSuhoviy</h1>
 
-            <h1>H1 test</h1>
+            <br />
+            <span>Tasks is ready for testing.</span>
+            <br />
+            <br />
+            <h4>Changelog:</h4>
+
+            <template v-for="value in this.formStore.values" :key="value.name">
+                <preview-row :label="`${value.label}`" :data="value.data" />
+            </template>
         </div>
     </div>
 </template>
 <script>
 import copy from 'copy-to-clipboard';
-import { convert } from 'html-to-text';
+// import { convert } from 'html-to-text';
+import TurndownService from 'turndown';
 
+import PreviewRow from '@/components/PreviewRow.vue';
 import useFormStore from '@/stores/form.js';
 import { mapStores } from 'pinia';
 
 export default {
     name: 'LoggerPreview',
+    components: {
+        PreviewRow
+    },
     computed: {
         ...mapStores(useFormStore)
     },
@@ -29,6 +38,7 @@ export default {
         return {};
     },
     mounted() {
+        //TODO: To refactor / move to separate component?
         const codeBlocks = document.querySelectorAll('.preview');
         codeBlocks.forEach((block) => {
             const copyPrompt = document.createElement('div');
@@ -40,16 +50,13 @@ export default {
             copyPrompt.appendChild(copyIcon);
             copyPrompt.appendChild(copyPromptText);
             block.appendChild(copyPrompt);
+
             block.querySelector('.copy-prompt > p').addEventListener('click', (evt) => {
-                console.log(
-                    'log_without_convert:',
-                    block.querySelector('.preview__source').textContent
-                );
-                console.log(
-                    'log_with_convert:',
-                    convert(block.querySelector('.preview__source').textContent)
-                );
-                copy(convert(block.querySelector('.preview__source').textContent));
+                var turndownService = new TurndownService();
+                var markdown = turndownService.turndown(block.querySelector('.preview__source'));
+
+                console.log('log_:', markdown);
+                copy(markdown);
 
                 block.querySelector('.copy-prompt > p').innerHTML = 'Copied!';
                 setTimeout(() => {
@@ -60,6 +67,7 @@ export default {
     }
 };
 </script>
+
 <style>
 code {
 }
