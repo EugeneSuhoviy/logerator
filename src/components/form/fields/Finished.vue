@@ -2,40 +2,26 @@
     <fieldset>
         <legend>Finished changelog:</legend>
 
-        <textarea-field :label="'Changelog'" />
-        <textarea-field :label="'QA Notes'" />
-        <textarea-field :label="'Deployment notes'" />
+        <textarea-field ref="changelog" :name="'changelog'" :label="'Changelog'" />
+        <textarea-field ref="qa_notes" :name="'qa_notes'" :label="'QA Notes'" />
+        <textarea-field ref="deployment_notes" :name="'deployment_notes'" :label="'Deployment notes'" />
 
         <input-link-field ref="link_store" :name="'link_store'" :label="'Link to Store'" />
         <input-link-field ref="screenshot" :name="'screenshot'" :label="'Attached screenshots'" />
         <input-link-field ref="pr_release" :name="'pr_release'" :label="'PR Release'" />
         <input-link-field ref="pr_staging" :name="'pr_staging'" :label="'PR Staging'" />
 
-        <label for="basic-url" class="form-label">Environment</label>
-        <div class="input-group mb-3">
-            <div class="input-group-text">
-                <input
-                    class="form-check-input mt-0"
-                    type="checkbox"
-                    value=""
-                    aria-label="Checkbox for following text input"
-                />
-            </div>
-            <select class="form-select" id="inputGroupSelect01">
-                <option selected>Choose...</option>
-                <option value="1">Staging</option>
-                <option value="2">Production</option>
-                <option value="3">Pre Production</option>
-            </select>
-        </div>
+        <select-field ref="environment" :name="'environment'" :label="'Environment'" />
+        
     </fieldset>
 </template>
 <script>
 import InputLinkField from '@/components/form/inputs/InputLink.vue';
 import TextareaField from '@/components/form/inputs/Textarea.vue';
+import SelectField from '@/components/form/inputs/Select.vue';
 
 export default {
     name: 'Finished',
-    components: { TextareaField, InputLinkField }
+    components: { TextareaField, InputLinkField, SelectField }
 };
 </script>

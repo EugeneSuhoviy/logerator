@@ -3,7 +3,6 @@
         <form-tabs :active-tab="tab" @tab-change="updateTab" />
     </div>
     <div class="container">
-
         <vee-form @submit="onSubmit" :validation-schema="schema">
 
             <Finished ref="fields" v-if="tab === 'finished'" />

@@ -9,12 +9,16 @@
                 aria-label="Checkbox for following text input"
             />
         </div>
-        <vee-field as="textarea" :name="name" id="description" rows="5" class="form-control" aria-label="Text input with checkbox"/>
+        <vee-field :name="name" as="select" class="form-select">
+            <option value="Staging">Staging</option>
+            <option value="Production">Production</option>
+            <option value="Pre Production">Pre Production</option>
+        </vee-field>
     </div>
 </template>
 <script>
 export default {
-    name: 'TextareaField',
+    name: 'SelectField',
     props: {
         label: {
             required: true
