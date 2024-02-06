@@ -5,21 +5,26 @@
             <input
                 class="form-check-input mt-0"
                 type="checkbox"
-                value=""
                 aria-label="Checkbox for following text input"
                 tabindex="-1"
             />
         </div>
-        <vee-field :name="name" as="select" class="form-select">
-            <option value="Staging">Staging</option>
-            <option value="Production">Production</option>
-            <option value="Pre Production">Pre Production</option>
-        </vee-field>
+        <vee-field
+            :name="name"
+            type="text"
+            class="form-control"
+            aria-label="Text input with checkbox"
+        />
+        <ErrorMessage :name="name" />
     </div>
 </template>
+
 <script>
+import { ErrorMessage } from 'vee-validate';
+
 export default {
-    name: 'SelectField',
+    name: 'InputField',
+    components: { ErrorMessage },
     props: {
         label: {
             required: true
@@ -27,6 +32,9 @@ export default {
         name: {
             required: true
         }
+    },
+    mounted() {
+        // console.log('log_:', this.$refs.input);
     }
 };
 </script>

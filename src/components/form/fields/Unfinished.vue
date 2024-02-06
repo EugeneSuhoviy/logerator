@@ -1,17 +1,20 @@
 <template>
     <fieldset>
         <legend>Finished changelog:</legend>
-
-        <input-link-field ref="link_store" :name="'link_store'" :label="'Link to Store'" />
-        <input-link-field ref="screenshot" :name="'screenshot'" :label="'Attached screenshots'" />
-        <input-link-field ref="pr_release" :name="'pr_release'" :label="'PR Release'" />
+        <select-field ref="environment" :name="'environment'" :label="'Environment'" />
+        <input-field ref="branch" :name="'branch'" :label="'Branch'" />
+        <input-field ref="branch" :name="'branch'" :label="'Branch'" />
+        <textarea-field ref="current_status" :name="'current_status'" :label="'Current status'" />
+        <textarea-field ref="next_steps" :name="'next_steps'" :label="'Next steps'" />
     </fieldset>
 </template>
 <script>
-import InputLinkField from '@/components/form/inputs/InputLink.vue';
+import SelectField from '@/components/form/inputs/Select.vue';
+import InputField from '@/components/form/inputs/Input.vue';
+import TextareaField from '@/components/form/inputs/Textarea.vue';
 
 export default {
     name: 'Unfinished',
-    components: { InputLinkField }
+    components: { TextareaField, InputField, SelectField}
 };
 </script>

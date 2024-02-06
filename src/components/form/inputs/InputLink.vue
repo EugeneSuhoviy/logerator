@@ -6,6 +6,7 @@
                 class="form-check-input mt-0"
                 type="checkbox"
                 aria-label="Checkbox for following text input"
+                tabindex="-1"
             />
         </div>
         <vee-field

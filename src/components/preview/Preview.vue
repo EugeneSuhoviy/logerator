@@ -1,6 +1,5 @@
 <template>
     <h2>Preview</h2>
-
     <div class="preview">
         <div class="preview__source" v-if="this.formStore.values.length">
             <h1>@EugeneSuhoviy</h1>
@@ -15,6 +14,7 @@
                 <preview-row :label="`${value.label}`" :data="value.data" />
             </template>
         </div>
+<!--        <copy-btn />-->
     </div>
 </template>
 <script>
@@ -24,10 +24,12 @@ import TurndownService from 'turndown';
 import PreviewRow from '@/components/preview/Row.vue';
 import useFormStore from '@/stores/form.js';
 import { mapStores } from 'pinia';
+import CopyBtn from '@/components/preview/CopyBtn.vue';
 
 export default {
     name: 'LoggerPreview',
     components: {
+        CopyBtn,
         PreviewRow
     },
     computed: {
@@ -37,9 +39,11 @@ export default {
         return {};
     },
     mounted() {
-        //TODO: To refactor / move to separate component?
+
         const codeBlocks = document.querySelectorAll('.preview');
+
         codeBlocks.forEach((block) => {
+
             const copyPrompt = document.createElement('div');
             copyPrompt.className = 'copy-prompt';
             const copyPromptText = document.createElement('p');

@@ -7,6 +7,7 @@
                 type="checkbox"
                 value=""
                 aria-label="Checkbox for following text input"
+                tabindex="-1"
             />
         </div>
         <vee-field as="textarea" :name="name" id="description" rows="5" class="form-control" aria-label="Text input with checkbox"/>
