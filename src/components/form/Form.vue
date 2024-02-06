@@ -4,11 +4,8 @@
     </div>
     <div class="container">
         <vee-form @submit="onSubmit" :validation-schema="schema">
-
             <Finished ref="fields" v-if="tab === 'finished'" />
-
             <Unfinished ref="fields" v-if="tab === 'unfinished'" />
-
             <button type="submit" class="btn btn-primary">Submit</button>
         </vee-form>
     </div>
@@ -28,6 +25,7 @@ export default {
         Finished,
         Unfinished
     },
+    emits: ['form-submitted'],
     computed: {
         ...mapStores(useFormStore)
     },
@@ -45,6 +43,7 @@ export default {
         },
         onSubmit(values) {
             this.formStore.values = this.prepareJson(values);
+            this.$emit('form-submitted', 1);
         },
         prepareJson(values) {
             const result = [];

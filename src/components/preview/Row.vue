@@ -1,10 +1,10 @@
 <template>
-    <div><h4>{{ label }}</h4>:<span>{{ data }}</span></div>
+    <div><span>{{ label }}</span>: <span>{{ data }}</span></div>
 </template>
 
 <script>
 export default {
     name: 'PreviewRow',
-    props: ['label', 'data'],
+    props: ['label', 'data']
 };
 </script>

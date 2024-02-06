@@ -3,10 +3,12 @@
         <div class="container">
             <div class="row align-items-start">
                 <div class="col">
-                    <logger-form />
+                    <logger-form @form-submitted="showPreview"/>
                 </div>
                 <div class="col">
-                    <logger-preview />
+                    <div v-if="isPreviewVisible" >
+                        <logger-preview />
+                    </div>
                 </div>
             </div>
         </div>
@@ -24,7 +26,14 @@ export default {
         LoggerPreview
     },
     data() {
-        return {};
+        return {
+            isPreviewVisible: false
+        };
+    },
+    methods: {
+        showPreview() {
+            this.isPreviewVisible = true;
+        }
     }
 };
 </script>
